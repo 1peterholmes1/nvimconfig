@@ -255,6 +255,24 @@ local config = {
       ["APZelos/blamer.nvim"] = {
       },
 
+      --Todo highlighter
+      ["folke/todo-comments.nvim"] = {
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+          require("todo-comments").setup {}
+        end
+      },
+
+
+      ["folke/trouble.nvim"] = {
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+          require("trouble").setup {
+            position = "right",
+            width = 50,
+          }
+        end
+      }
 
     },
     -- All other entries override the require("<key>").setup({...}) call for default plugins
