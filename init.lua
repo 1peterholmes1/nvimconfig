@@ -8,16 +8,16 @@ local config = {
 
         -- Configure AstroNvim updates
         updater = {
-                remote = "origin", -- remote to use
-                channel = "stable", -- "stable" or "nightly"
-                version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-                branch = "main", -- branch name (NIGHTLY ONLY)
-                commit = nil, -- commit hash (NIGHTLY ONLY)
-                pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
-                skip_prompts = false, -- skip prompts about breaking changes
+                remote = "origin",     -- remote to use
+                channel = "stable",    -- "stable" or "nightly"
+                version = "latest",    -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+                branch = "main",       -- branch name (NIGHTLY ONLY)
+                commit = nil,          -- commit hash (NIGHTLY ONLY)
+                pin_plugins = nil,     -- nil, true, false (nil will pin plugins on stable only)
+                skip_prompts = false,  -- skip prompts about breaking changes
                 show_changelog = true, -- show the changelog after performing an update
-                auto_reload = false, -- automatically reload and sync packer after a successful update
-                auto_quit = false, -- automatically quit the current session after a successful update
+                auto_reload = false,   -- automatically reload and sync packer after a successful update
+                auto_quit = false,     -- automatically quit the current session after a successful update
                 -- remotes = { -- easily add new remotes to track
                 --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
                 --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
@@ -25,8 +25,8 @@ local config = {
                 -- },
         },
 
-        -- Set colorscheme to use
-        colorscheme = "default_theme",
+        -- -- Set colorscheme to use
+        -- colorscheme = "default_theme",
 
         -- Add highlight groups in any theme
         highlights = {
@@ -41,20 +41,20 @@ local config = {
         -- set vim options here (vim.<first_key>.<second_key> = value)
         options = function(local_vim)
                 -- set to true or false etc.
-                local_vim.opt.relativenumber = true -- sets vim.opt.relativenumber
-                local_vim.opt.number = true -- sets vim.opt.number
-                local_vim.opt.spell = false -- sets vim.opt.spell
-                local_vim.opt.signcolumn = "auto" -- sets vim.opt.signcolumn to auto
-                local_vim.opt.wrap = false -- sets vim.opt.wrap
-                local_vim.g.mapleader = " " -- sets vim.g.mapleader
-                local_vim.g.autoformat_enabled = true -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
-                local_vim.g.cmp_enabled = true -- enable completion at start
-                local_vim.g.autopairs_enabled = true -- enable autopairs at start
-                local_vim.g.diagnostics_enabled = true -- enable diagnostics at start
+                local_vim.opt.relativenumber = true           -- sets vim.opt.relativenumber
+                local_vim.opt.number = true                   -- sets vim.opt.number
+                local_vim.opt.spell = false                   -- sets vim.opt.spell
+                local_vim.opt.signcolumn = "auto"             -- sets vim.opt.signcolumn to auto
+                local_vim.opt.wrap = false                    -- sets vim.opt.wrap
+                local_vim.g.mapleader = " "                   -- sets vim.g.mapleader
+                local_vim.g.autoformat_enabled = true         -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+                local_vim.g.cmp_enabled = true                -- enable completion at start
+                local_vim.g.autopairs_enabled = true          -- enable autopairs at start
+                local_vim.g.diagnostics_enabled = true        -- enable diagnostics at start
                 local_vim.g.status_diagnostics_enabled = true -- enable diagnostics in statusline
-                local_vim.g.icons_enabled = true -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
-                local_vim.g.ui_notifications_enabled = true -- disable notifications when toggling UI elements
-                local_vim.g.heirline_bufferline = false -- enable new heirline based bufferline (requires :PackerSync after changing)
+                local_vim.g.icons_enabled = true              -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+                local_vim.g.ui_notifications_enabled = true   -- disable notifications when toggling UI elements
+                local_vim.g.heirline_bufferline = false       -- enable new heirline based bufferline (requires :PackerSync after changing)
                 local_vim.g.vimtex_view_method = 'skim'
                 local_vim.g.tabstop = 4
                 local_vim.g.shiftwidth = 4
@@ -97,49 +97,6 @@ local config = {
                 "                                                                       "
         },
 
-        -- Default theme configuration
-        default_theme = {
-                -- Modify the color palette for the default theme
-                colors = {
-                        fg = "#abb2bf",
-                        bg = "#1e222a",
-                },
-                highlights = function(hl) -- or a function that returns a new table of colors to set
-                        local C = require "default_theme.colors"
-
-                        hl.Normal = { fg = C.fg, bg = C.bg }
-
-                        -- New approach instead of diagnostic_style
-                        hl.DiagnosticError.italic = true
-                        hl.DiagnosticHint.italic = true
-                        hl.DiagnosticInfo.italic = true
-                        hl.DiagnosticWarn.italic = true
-
-                        return hl
-                end,
-                -- enable or disable highlighting for extra plugins
-                plugins = {
-                        aerial = true,
-                        beacon = false,
-                        bufferline = true,
-                        cmp = true,
-                        dashboard = true,
-                        highlighturl = true,
-                        hop = false,
-                        indent_blankline = true,
-                        lightspeed = false,
-                        ["neo-tree"] = true,
-                        notify = true,
-                        ["nvim-tree"] = false,
-                        ["nvim-web-devicons"] = true,
-                        rainbow = true,
-                        symbols_outline = false,
-                        telescope = true,
-                        treesitter = true,
-                        vimwiki = false,
-                        ["which-key"] = true,
-                },
-        },
 
         -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
         diagnostics = {
@@ -156,7 +113,7 @@ local config = {
                 formatting = {
                         -- control auto formatting on save
                         format_on_save = {
-                                enabled = true, -- enable or disable format on save globally
+                                enabled = true,     -- enable or disable format on save globally
                                 allow_filetypes = { -- enable format on save for specified filetypes only
                                         -- "go",
                                 },
@@ -236,147 +193,101 @@ local config = {
 
         -- Configure plugins
         plugins = {
-                init = {
-                        -- You can disable default plugins as follows:
-                        -- ["goolord/alpha-nvim"] = { disable = true },
-
-                        -- You can also add new plugins here as well:
-                        -- Add plugins, the packer syntax without the "use"
-                        -- { "andweeb/presence.nvim" },
-                        -- {
-                        --   "ray-x/lsp_signature.nvim",
-                        --   event = "BufRead",
-                        --   config = function()
-                        --     require("lsp_signature").setup()
-                        --   end,
-                        -- },
-
-                        -- We also support a key value style plugin definition similar to NvChad:
-                        -- ["ray-x/lsp_signature.nvim"] = {
-                        --   event = "BufRead",
-                        --   config = function()
-                        --     require("lsp_signature").setup()
-                        --   end,
-                        -- },
-                        --
-
-                        --Autosave
-                        ["pocco81/auto-save.nvim"] = {
-                                enabled = true,
-                                trigger_events = { "InsertLeave" },
-                        },
-                        -- {
-                        --"pocco81/auto-save.nvim"
-                        -- },
-
-
-                        --VimTex
-                        ["lervag/vimtex"] = {
-                        },
-                        --{
-                        --"lervag/vimtex"
-                        --},
-
-                        --inline Git Blame
-                        ["APZelos/blamer.nvim"] = {
-                        },
-                        --{
-                        --"APZelos/blamer.nvim"
-                        --},
-
-
-                        --Todo highlighter
-                        ["folke/todo-comments.nvim"] = {
-                                requires = "nvim-lua/plenary.nvim",
-                                config = function()
-                                        require("todo-comments").setup {}
-                                end
-                        },
-                        --{
-                        --"folke/todo-comments.nvim",
-                        --dependencies = "nvim-lua/plenary.nvim",
-                        --config = function()
-                        --require("todo-comments").setup {}
-                        --end
-                        --},
-
-
-                        ["folke/trouble.nvim"] = {
-                                requires = "kyazdani42/nvim-web-devicons",
-                                config = function()
-                                        require("trouble").setup {
-                                                position = "right",
-                                                width = 50,
-                                        }
-                                end
-                        },
-                        --{
-                        --"trouble.nvim",
-                        --dependencies = "kyazdani42/nvim-web-devicons",
-                        --config = function()
-                        --require("trouble").setup {
-                        --position = "right",
-                        --width = 50,
-                        --}
-                        --end
-                        --},
-
-                        ["ray-x/lsp_signature.nvim"] = {
-                                config = function()
-                                        require("lsp_signature").setup()
-                                end
-                        },
-                        --{
-                        --"ray-x/lsp_signature.nvim",
-                        --config = function()
-                        --require("lsp_signature").setup()
-                        --end
-                        --}
-
-                        ["nvim-emmet/nvim-emmet"] = {},
-                        --"nvim-emmet/nvim-emmet"
-
-                        ["kdheepak/lazygit.nvim"] = {},
-                        --"kdheepak/lazygit.nvim"
-
-                        ["dcampos/nvim-sftp-sync"] = { run = ':UpdateRemotePlugins' },
-
-                        -- ["rinx/nvim-minimap"] = {},
-
-                        -- ["f-person/auto-dark-mode.nvim"] = {
-                        --         config = function()
-                        --                 local auto_dark_mode = require('auto-dark-mode')
-                        --                 auto_dark_mode.setup()
-                        --                 auto_dark_mode.init()
-                        --         end
-                        -- },
-
-                        ["mfussenegger/nvim-jdtls"] = {
-
-                        },
-
-                        ["zbirenbaum/copilot.lua"] = {
-                                cmd = "Copilot",
-                                event = "InsertEnter",
-                                config = function()
-                                        require("copilot").setup({
-                                                suggestion = { enabled = false },
-                                                panel = { enabled = false }
-                                        })
-                                end
-                        },
-
-                        ["zbirenbaum/copilot-cmp"] = {
-                                after = { "copilot.lua", "nvim-cmp" },
-                                config = function()
-                                        require("copilot_cmp").setup()
-                                        astronvim.add_cmp_source({ name = "copilot", priority = 700 })
-                                end
-                        }
-
-
-
+                {
+                        "pocco81/auto-save.nvim",
+                        config = function()
+                                require('auto-save').setup {
+                                        trigger_events = { "InsertLeave" }
+                                }
+                        end
                 },
+
+
+                "lervag/vimtex",
+                "APZelos/blamer.nvim",
+
+
+                {
+                        "folke/todo-comments.nvim",
+                        dependencies = "nvim-lua/plenary.nvim",
+                        config = function()
+                                require("todo-comments").setup {}
+                        end
+                },
+
+
+                {
+                        "folke/trouble.nvim",
+                        dependencies = "nvim-web-devicons",
+                        config = function()
+                                require("trouble").setup {
+                                        position = "right",
+                                        width = 50,
+                                }
+                        end
+                },
+
+                {
+                        "ray-x/lsp_signature.nvim",
+                        config = function()
+                                require("lsp_signature").setup()
+                        end
+                },
+
+                "nvim-emmet/nvim-emmet",
+
+                "kdheepak/lazygit.nvim",
+
+                {
+                        "zbirenbaum/copilot.lua",
+                        cmd = "Copilot",
+                        event = "InsertEnter",
+                        config = function()
+                                require("copilot").setup({
+                                        suggestion = { enabled = false },
+                                        panel = { enabled = false }
+                                })
+                        end
+                },
+
+                {
+                        "zbirenbaum/copilot-cmp",
+                        after = { "copilot.lua", "nvim-cmp" },
+                        config = function()
+                                require("copilot_cmp").setup()
+                                astronvim.add_cmp_source({ name = "copilot", priority = 700 })
+                        end
+                },
+
+                {
+                        "akinsho/toggleterm.nvim",
+                        config = function()
+                                require('toggleterm').setup {
+                                        direction = 'horizontal'
+                                }
+                        end
+                },
+                {
+                        "AstroNvim/astrotheme",
+                },
+                {
+                        "goolord/alpha-nvim",
+                        opts = function(_, opts)
+                                opts.section.header.val = {
+                                        "                                                                       ",
+                                        "                                                                     ",
+                                        "       ████ ██████           █████      ██                     ",
+                                        "      ███████████             █████                             ",
+                                        "      █████████ ███████████████████ ███   ███████████   ",
+                                        "     █████████  ███    █████████████ █████ ██████████████   ",
+                                        "    █████████ ██████████ █████████ █████ █████ ████ █████   ",
+                                        "  ███████████ ███    ███ █████████ █████ █████ ████ █████  ",
+                                        " ██████  █████████████████████ ████ █████ █████ ████ ██████ ",
+                                        "                                                                       "
+                                }
+                        end
+                },
+
                 -- All other entries override the require("<key>").setup({...}) call for default plugins
                 ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
                         -- config variable is the default configuration table for the setup function call
@@ -392,7 +303,7 @@ local config = {
                         }
                         return config -- return final config table
                 end,
-                treesitter = { -- overrides `require("treesitter").setup(...)`
+                treesitter = {        -- overrides `require("treesitter").setup(...)`
                         -- ensure_installed = { "lua" },
                         autotag = {
                                 enable = true,
@@ -415,123 +326,7 @@ local config = {
                 ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
                         -- ensure_installed = { "python" },
                 },
-        },
-
-        -- LuaSnip Options
-        luasnip = {
-                -- Extend filetypes
-                filetype_extend = {
-                        -- javascript = { "javascriptreact" },
-                },
-                -- Configure luasnip loaders (vscode, lua, and/or snipmate)
-                vscode = {
-                        -- Add paths for including more VS Code style snippets in luasnip
-                        paths = {},
-                },
-        },
-
-        -- CMP Source Priorities
-        -- modify here the priorities of default cmp sources
-        -- higher value == higher priority
-        -- The value can also be set to a boolean for disabling default sources:
-        -- false == disabled
-        -- true == 1000
-        cmp = {
-                source_priority = {
-                        nvim_lsp = 1000,
-                        luasnip = 750,
-                        buffer = 500,
-                        path = 250,
-                },
-        },
-
-        dap = {
-                configurations = {
-                        cpp = {
-                                {
-
-                                        name = "Launch codelldb with args",
-                                        type = "codelldb",
-                                        request = 'launch',
-                                        program = function()
-                                                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',
-                                                        'file')
-                                        end,
-                                        cwd = '${workspaceFolder}',
-                                        stopOnEntry = false,
-                                        args = function()
-                                                a = {}
-                                                a[1] = vim.fn.input('Args: ')
-                                                return a
-                                        end,
-                                }
-                        }
-                }
-        },
-
-
-        -- Customize Heirline options
-        heirline = {
-                -- -- Customize different separators between sections
-                -- separators = {
-                --   tab = { "", "" },
-                -- },
-                -- -- Customize colors for each element each element has a `_fg` and a `_bg`
-                -- colors = function(colors)
-                --   colors.git_branch_fg = astronvim.get_hlgroup "Conditional"
-                --   return colors
-                -- end,
-                -- -- Customize attributes of highlighting in Heirline components
-                -- attributes = {
-                --   -- styling choices for each heirline element, check possible attributes with `:h attr-list`
-                --   git_branch = { bold = true }, -- bold the git branch statusline component
-                -- },
-                -- -- Customize if icons should be highlighted
-                -- icon_highlights = {
-                --   breadcrumbs = false, -- LSP symbols in the breadcrumbs
-                --   file_icon = {
-                --     winbar = false, -- Filetype icon in the winbar inactive windows
-                --     statusline = true, -- Filetype icon in the statusline
-                --   },
-                -- },
-        },
-
-        -- Modify which-key registration (Use this with mappings table in the above.)
-        ["which-key"] = {
-                -- Add bindings which show up as group name
-                register = {
-                        -- first key is the mode, n == normal mode
-                        n = {
-                                -- second key is the prefix, <leader> prefixes
-                                ["<leader>"] = {
-                                        -- third key is the key to bring up next level and its displayed
-                                        -- group name in which-key top level menu
-                                        ["b"] = { name = "Buffer" },
-                                },
-                        },
-                },
-        },
-
-        -- This function is run last and is a good place to configuring
-        -- augroups/autocommands and custom filetypes also this just pure lua so
-        -- anything that doesn't fit in the normal config locations above can go here
-        polish = function()
-                -- Set up custom filetypes
-                -- vim.filetype.add {
-                --   extension = {
-                --     foo = "fooscript",
-                --   },
-                --   filename = {
-                --     ["Foofile"] = "fooscript",
-                --   },
-                --   pattern = {
-                --     ["~/%.config/foo/.*"] = "fooscript",
-                --   },
-                -- }
-        end,
-        toggleterm = {
-                direction = "horizontal",
-        },
+        }
 }
 
 return config
