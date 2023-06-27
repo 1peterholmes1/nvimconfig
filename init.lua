@@ -199,7 +199,8 @@ local config = {
                                 require('auto-save').setup {
                                         trigger_events = { "InsertLeave" }
                                 }
-                        end
+                        end,
+                        lazy = false
                 },
 
 
@@ -255,7 +256,7 @@ local config = {
                         after = { "copilot.lua", "nvim-cmp" },
                         config = function()
                                 require("copilot_cmp").setup()
-                                astronvim.add_cmp_source({ name = "copilot", priority = 700 })
+                                -- astronvim.add_cmp_source({ name = "copilot", priority = 700 })
                         end
                 },
 
@@ -285,6 +286,23 @@ local config = {
                                         " ██████  █████████████████████ ████ █████ █████ ████ ██████ ",
                                         "                                                                       "
                                 }
+                        end
+                },
+
+                {
+                        "hrsh7th/nvim-cmp",
+                        dependencies = {
+                                "zbirenbaum/copilot-cmp"
+                        },
+                        opts = function(_, opts)
+                                local cmp = require "cmp"
+                                opts.sources = cmp.config.sources {
+                                        { name = "nvim_lsp", priority = 1000 },
+                                        { name = "luasnip",  priority = 750 },
+                                        { name = "buffer",   priority = 250 },
+                                        { name = "copilot",  priority = 700 }
+                                }
+                                return opts
                         end
                 },
 
