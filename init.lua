@@ -39,28 +39,40 @@ local config = {
         },
 
         -- set vim options here (vim.<first_key>.<second_key> = value)
-        options = {
-                opt = {
-                        -- set to true or false etc.
-                        relativenumber = true, -- sets vim.opt.relativenumber
-                        number = true, -- sets vim.opt.number
-                        spell = false, -- sets vim.opt.spell
-                        signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-                        wrap = false, -- sets vim.opt.wrap
-                },
-                g = {
-                        mapleader = " ", -- sets vim.g.mapleader
-                        autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
-                        cmp_enabled = true, -- enable completion at start
-                        autopairs_enabled = true, -- enable autopairs at start
-                        diagnostics_enabled = true, -- enable diagnostics at start
-                        status_diagnostics_enabled = true, -- enable diagnostics in statusline
-                        icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
-                        ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-                        heirline_bufferline = false, -- enable new heirline based bufferline (requires :PackerSync after changing)
-                        vimtex_view_method = 'skim',
-                },
-        },
+        options = function(local_vim)
+                -- set to true or false etc.
+                local_vim.opt.relativenumber = true -- sets vim.opt.relativenumber
+                local_vim.opt.number = true -- sets vim.opt.number
+                local_vim.opt.spell = false -- sets vim.opt.spell
+                local_vim.opt.signcolumn = "auto" -- sets vim.opt.signcolumn to auto
+                local_vim.opt.wrap = false -- sets vim.opt.wrap
+                local_vim.g.mapleader = " " -- sets vim.g.mapleader
+                local_vim.g.autoformat_enabled = true -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+                local_vim.g.cmp_enabled = true -- enable completion at start
+                local_vim.g.autopairs_enabled = true -- enable autopairs at start
+                local_vim.g.diagnostics_enabled = true -- enable diagnostics at start
+                local_vim.g.status_diagnostics_enabled = true -- enable diagnostics in statusline
+                local_vim.g.icons_enabled = true -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+                local_vim.g.ui_notifications_enabled = true -- disable notifications when toggling UI elements
+                local_vim.g.heirline_bufferline = false -- enable new heirline based bufferline (requires :PackerSync after changing)
+                local_vim.g.vimtex_view_method = 'skim'
+                local_vim.g.tabstop = 4
+                local_vim.g.shiftwidth = 4
+                local_vim.g.noexpandtab = true
+                local_vim.g.offset_encoding = "utf-16"
+                local_vim.g.sftp_sync_servers = {
+                        cs350 = {
+                                local_path = '/Users/peter/CS350',
+                                remote_path = '/home/student-csci350',
+                                host = 'localhost',
+                                port = 1212,
+                                username = 'student-csci350',
+                                password = 'student350',
+                        },
+                }
+                local_vim.g.loaded_remote_plugins = nil
+                return local_vim
+        end,
         -- If you need more control, you can use the function()...end notation
         -- options = function(local_vim)
         --   local_vim.opt.relativenumber = true
@@ -73,17 +85,16 @@ local config = {
 
         -- Set dashboard header
         header = {
-                " █████  ███████ ████████ ██████   ██████",
-                "██   ██ ██         ██    ██   ██ ██    ██",
-                "███████ ███████    ██    ██████  ██    ██",
-                "██   ██      ██    ██    ██   ██ ██    ██",
-                "██   ██ ███████    ██    ██   ██  ██████",
-                " ",
-                "    ███    ██ ██    ██ ██ ███    ███",
-                "    ████   ██ ██    ██ ██ ████  ████",
-                "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-                "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-                "    ██   ████   ████   ██ ██      ██",
+                "                                                                       ",
+                "                                                                     ",
+                "       ████ ██████           █████      ██                     ",
+                "      ███████████             █████                             ",
+                "      █████████ ███████████████████ ███   ███████████   ",
+                "     █████████  ███    █████████████ █████ ██████████████   ",
+                "    █████████ ██████████ █████████ █████ █████ ████ █████   ",
+                "  ███████████ ███    ███ █████████ █████ █████ ████ █████  ",
+                " ██████  █████████████████████ ████ █████ █████ ████ ██████ ",
+                "                                                                       "
         },
 
         -- Default theme configuration
@@ -190,6 +201,11 @@ local config = {
                         --     },
                         --   },
                         -- },
+                        clangd = {
+                                capabilities = {
+                                        offsetEncoding = "utf-16"
+                                }
+                        }
                 },
         },
 
@@ -207,6 +223,8 @@ local config = {
                         ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
                         ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
                         ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
+                        ["<leader>tt"] = { "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble pane" },
+                        ["<leader>td"] = { "<cmd>TodoLocList<cr>", desc = "Toggle TODO Location pane" }
                         -- quick save
                         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
                 },
@@ -245,15 +263,27 @@ local config = {
                         --Autosave
                         ["pocco81/auto-save.nvim"] = {
                                 enabled = true,
+                                trigger_events = { "InsertLeave" },
                         },
+                        -- {
+                        --"pocco81/auto-save.nvim"
+                        -- },
+
 
                         --VimTex
                         ["lervag/vimtex"] = {
                         },
+                        --{
+                        --"lervag/vimtex"
+                        --},
 
                         --inline Git Blame
                         ["APZelos/blamer.nvim"] = {
                         },
+                        --{
+                        --"APZelos/blamer.nvim"
+                        --},
+
 
                         --Todo highlighter
                         ["folke/todo-comments.nvim"] = {
@@ -262,6 +292,13 @@ local config = {
                                         require("todo-comments").setup {}
                                 end
                         },
+                        --{
+                        --"folke/todo-comments.nvim",
+                        --dependencies = "nvim-lua/plenary.nvim",
+                        --config = function()
+                        --require("todo-comments").setup {}
+                        --end
+                        --},
 
 
                         ["folke/trouble.nvim"] = {
@@ -273,16 +310,70 @@ local config = {
                                         }
                                 end
                         },
+                        --{
+                        --"trouble.nvim",
+                        --dependencies = "kyazdani42/nvim-web-devicons",
+                        --config = function()
+                        --require("trouble").setup {
+                        --position = "right",
+                        --width = 50,
+                        --}
+                        --end
+                        --},
 
                         ["ray-x/lsp_signature.nvim"] = {
                                 config = function()
                                         require("lsp_signature").setup()
                                 end
                         },
+                        --{
+                        --"ray-x/lsp_signature.nvim",
+                        --config = function()
+                        --require("lsp_signature").setup()
+                        --end
+                        --}
 
                         ["nvim-emmet/nvim-emmet"] = {},
+                        --"nvim-emmet/nvim-emmet"
 
                         ["kdheepak/lazygit.nvim"] = {},
+                        --"kdheepak/lazygit.nvim"
+
+                        ["dcampos/nvim-sftp-sync"] = { run = ':UpdateRemotePlugins' },
+
+                        -- ["rinx/nvim-minimap"] = {},
+
+                        -- ["f-person/auto-dark-mode.nvim"] = {
+                        --         config = function()
+                        --                 local auto_dark_mode = require('auto-dark-mode')
+                        --                 auto_dark_mode.setup()
+                        --                 auto_dark_mode.init()
+                        --         end
+                        -- },
+
+                        ["mfussenegger/nvim-jdtls"] = {
+
+                        },
+
+                        ["zbirenbaum/copilot.lua"] = {
+                                cmd = "Copilot",
+                                event = "InsertEnter",
+                                config = function()
+                                        require("copilot").setup({
+                                                suggestion = { enabled = false },
+                                                panel = { enabled = false }
+                                        })
+                                end
+                        },
+
+                        ["zbirenbaum/copilot-cmp"] = {
+                                after = { "copilot.lua", "nvim-cmp" },
+                                config = function()
+                                        require("copilot_cmp").setup()
+                                        astronvim.add_cmp_source({ name = "copilot", priority = 700 })
+                                end
+                        }
+
 
 
                 },
@@ -354,6 +445,31 @@ local config = {
                 },
         },
 
+        dap = {
+                configurations = {
+                        cpp = {
+                                {
+
+                                        name = "Launch codelldb with args",
+                                        type = "codelldb",
+                                        request = 'launch',
+                                        program = function()
+                                                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',
+                                                        'file')
+                                        end,
+                                        cwd = '${workspaceFolder}',
+                                        stopOnEntry = false,
+                                        args = function()
+                                                a = {}
+                                                a[1] = vim.fn.input('Args: ')
+                                                return a
+                                        end,
+                                }
+                        }
+                }
+        },
+
+
         -- Customize Heirline options
         heirline = {
                 -- -- Customize different separators between sections
@@ -413,6 +529,9 @@ local config = {
                 --   },
                 -- }
         end,
+        toggleterm = {
+                direction = "horizontal",
+        },
 }
 
 return config
