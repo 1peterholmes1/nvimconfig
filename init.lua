@@ -4,6 +4,8 @@
 -- You can think of a Lua "table" as a dictionary like data structure the
 -- normal format is "key = value". These also handle array like data structures
 -- where a value with no key simply has an implicit numeric key
+local utils = require "astronvim.utils"
+
 local config = {
 
         -- Configure AstroNvim updates
@@ -181,7 +183,9 @@ local config = {
                         ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
                         ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
                         ["<leader>tt"] = { "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble pane" },
-                        ["<leader>td"] = { "<cmd>TodoLocList<cr>", desc = "Toggle TODO Location pane" }
+                        ["<leader>td"] = { "<cmd>TodoLocList<cr>", desc = "Toggle TODO Location pane" },
+                        ["<leader>tl"] = { function() utils.toggle_term_cmd({ cmd = 'lazygit', direction = 'float' }) end, desc =
+                        "ToggleTerm lazygit" }
                         -- quick save
                         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
                 },
@@ -202,21 +206,14 @@ local config = {
                         end,
                         lazy = false
                 },
-
-
                 "lervag/vimtex",
-                "APZelos/blamer.nvim",
-
-
                 {
                         "folke/todo-comments.nvim",
                         dependencies = "nvim-lua/plenary.nvim",
                         config = function()
                                 require("todo-comments").setup {}
-                        end
+                        end,
                 },
-
-
                 {
                         "folke/trouble.nvim",
                         dependencies = "nvim-web-devicons",
@@ -227,18 +224,14 @@ local config = {
                                 }
                         end
                 },
-
                 {
                         "ray-x/lsp_signature.nvim",
                         config = function()
                                 require("lsp_signature").setup()
                         end
                 },
-
                 "nvim-emmet/nvim-emmet",
-
                 "kdheepak/lazygit.nvim",
-
                 {
                         "zbirenbaum/copilot.lua",
                         cmd = "Copilot",
@@ -250,7 +243,6 @@ local config = {
                                 })
                         end
                 },
-
                 {
                         "zbirenbaum/copilot-cmp",
                         after = { "copilot.lua", "nvim-cmp" },
@@ -259,7 +251,6 @@ local config = {
                                 -- astronvim.add_cmp_source({ name = "copilot", priority = 700 })
                         end
                 },
-
                 {
                         "akinsho/toggleterm.nvim",
                         config = function()
@@ -288,7 +279,6 @@ local config = {
                                 }
                         end
                 },
-
                 {
                         "hrsh7th/nvim-cmp",
                         dependencies = {
