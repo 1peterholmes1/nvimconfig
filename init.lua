@@ -295,6 +295,10 @@ local config = {
                                 return opts
                         end
                 },
+                {
+                        "tpope/vim-fugitive",
+                        lazy = false
+                },
 
                 -- All other entries override the require("<key>").setup({...}) call for default plugins
                 ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
